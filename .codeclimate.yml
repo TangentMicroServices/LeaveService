@@ -1,0 +1,17 @@
+---
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+ratings:
+  paths:
+  - "api.py"
+exclude_paths: []

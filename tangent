@@ -1,0 +1,29 @@
+project_name: leaveservice
+app_health_path: '/health/'
+
+with_hipchat: yes
+hipchat_room: "MicroServices"
+
+build_commands: []
+test_commands: 
+  - python manage.py test
+pre_service_up_commands: []
+post_service_up_commands: 
+  - mkdir -p /code/static/
+  - python manage.py migrate
+
+# service optionals:
+consul_tags: 
+  - api_service
+  - django_rest_framework
+
+with_kong: yes
+kong_simple_plugins:
+  - cors 
+  - key-auth
+
+kong_configurable_plugins:
+  - name: http-log
+    config: 
+      http_endpoint: "http://logstash.service.consul:8021/{{project_subdomain}}"
+
